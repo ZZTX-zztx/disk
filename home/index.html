@@ -4,46 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>私人云盘</title>
+  
+  <!-- 关键：引用你已有的 ./img/main.svg 作为标签图标 -->
+  <link rel="icon" type="image/svg+xml" href="./img/main.svg">
+  <link href="./img/main.ico" rel="icon" type="image/x-icon">
+
+  <!-- 兼容旧浏览器（可选，不加也不影响主流浏览器） -->
+  <link rel="alternate icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-<div id="login" class="card login-box">
-  <div class="title">登录</div>
-  <input id="user" placeholder="用户名">
-  <input id="pass" type="password" placeholder="密码">
-  <button onclick="login()">登录</button>
-  <button onclick="showRegister()">去注册</button>
-</div>
-
-<div id="register" class="card login-box" style="display:none;">
-  <div class="title">注册</div>
-  <input id="reg_user" placeholder="用户名">
-  <input id="reg_pass" type="password" placeholder="密码">
-  <button onclick="register()">注册</button>
-  <button onclick="showLogin()">返回登录</button>
-</div>
-
-<div id="main" style="display:none;">
-  <button onclick="logout()">退出登录</button>
-  <div class="card">
-    <div class="title">文件上传</div>
-    <div id="uploadBox">点击或拖拽上传</div>
-    <input type="file" id="file-input" multiple>
+  <!-- 登录面板 -->
+  <div id="loginPanel" class="card login-box">
+    <div class="title">私人云盘 - 登录</div>
+    <input type="text" id="loginUser" placeholder="请输入用户名" class="input">
+    <input type="password" id="loginPass" placeholder="请输入密码" class="input">
+    <button id="loginBtn" class="btn primary">登录</button>
+    <button id="toRegisterBtn" class="btn light">去注册</button>
   </div>
-  <div id="file-list"></div>
-</div>
 
-<div id="confirmModal" style="display:none;">
-  <p>确定删除？</p>
-  <button onclick="closeModal()">取消</button>
-  <button onclick="doDelete()">确定</button>
-</div>
+  <!-- 注册面板 -->
+  <div id="registerPanel" class="card login-box" style="display: none;">
+    <div class="title">私人云盘 - 注册</div>
+    <input type="text" id="regUser" placeholder="请设置用户名" class="input">
+    <input type="password" id="regPass" placeholder="请设置密码" class="input">
+    <button id="registerBtn" class="btn primary">注册</button>
+    <button id="toLoginBtn" class="btn light">返回登录</button>
+  </div>
 
-<script src="js/config.js"></script>
-<script src="js/db.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/main.js"></script>
+  <!-- 主面板 -->
+  <div id="mainPanel" class="main-container" style="display: none;">
+    <div class="header">
+      <h2>我的云盘</h2>
+      <button id="logoutBtn" class="btn light">退出登录</button>
+    </div>
 
+    <!-- 上传区域 -->
+    <div class="card upload-card">
+      <div class="title">文件上传</div>
+      <div id="uploadArea" class="upload-area">
+        <div class="upload-icon">📁</div>
+        <div class="upload-text">点击或拖拽文件到这里上传</div>
+        <input type="file" id="fileInput" multiple style="display: none;">
+      </div>
+    </div>
+
+    <!-- 文件列表 -->
+    <div class="card file-card">
+      <div class="title">我的文件</div>
+      <div id="fileList" class="file-list">暂无文件</div>
+    </div>
+  </div>
+
+  <!-- 删除确认弹窗 -->
+  <div id="deleteModal" class="modal" style="display: none;">
+    <div class="modal-box">
+      <div class="modal-title">确认删除</div>
+      <div class="modal-content">确定要删除这个文件吗？删除后无法恢复！</div>
+      <div class="modal-btns">
+        <button id="cancelDeleteBtn" class="btn light">取消</button>
+        <button id="confirmDeleteBtn" class="btn danger">确定删除</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
